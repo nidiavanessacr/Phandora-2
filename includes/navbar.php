@@ -8,9 +8,16 @@ if (session_status() === PHP_SESSION_NONE) {
 | Detectar si estamos dentro de /admin
 |--------------------------------------------------------------------------
 */
-$enAdmin = strpos($_SERVER['PHP_SELF'], '/admin/') !== false;
+$rutaActual = $_SERVER['PHP_SELF'];
 
-$base = $enAdmin ? '../' : '';
+if (
+    strpos($rutaActual, '/admin/') !== false ||
+    strpos($rutaActual, '/carrito/') !== false
+) {
+    $base = '../';
+} else {
+    $base = '';
+}
 
 $usuario = $_SESSION["usuario_nombre"] ?? null;
 $logueado = isset($_SESSION["usuario_id"]);
