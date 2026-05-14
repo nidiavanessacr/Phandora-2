@@ -83,7 +83,7 @@ data-nombre="<?= htmlspecialchars($p['nombre']) ?>">
           $<?= number_format($p['precio'],2) ?> MXN
         </h4>
 
-        <!-- ✅ BOTÓN CORREGIDO A POST -->
+        <!-- BOTÓN CORREGIDO A POST -->
         <form action="carrito/agregar_carrito.php" method="POST" style="display:inline;">
           <input type="hidden" name="id" value="<?= $p['id'] ?>">
           <button type="submit" class="btn btn-light">

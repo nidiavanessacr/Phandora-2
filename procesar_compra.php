@@ -2,7 +2,7 @@
 session_start();
 require_once 'config/db.php';
 
-// 🔒 validar sesión
+// validar sesión
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: ../login.php");
     exit;
@@ -10,13 +10,13 @@ if (!isset($_SESSION["usuario_id"])) {
 
 $usuario_id = $_SESSION["usuario_id"];
 
-// 🔒 validar método POST
+// validar método POST
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: checkout.php");
     exit;
 }
 
-// 📥 obtener datos del formulario
+// obtener datos del formulario
 $metodo_pago = $_POST["metodo_pago"] ?? '';
 $direccion = $_POST["direccion"] ?? '';
 $ciudad = $_POST["ciudad"] ?? '';
@@ -26,7 +26,7 @@ if (empty($metodo_pago)) {
     die("Método de pago inválido");
 }
 
-// 🛒 obtener carrito activo
+// obtener carrito activo
 $sql = "SELECT * FROM carrito
         WHERE usuario_id = ?
         AND estado = 'activo'";
@@ -43,7 +43,7 @@ if ($result->num_rows <= 0) {
 
 $total = 0;
 
-// 📦 procesar productos
+// procesar productos
 while($producto = $result->fetch_assoc()){
 
     $subtotal = $producto["producto_precio"] * $producto["cantidad"];
@@ -67,11 +67,11 @@ while($producto = $result->fetch_assoc()){
     $stmtStock->execute();
 }
 
-// 💰 impuestos
+// impuestos
 $iva = $total * 0.16;
 $total_final = $total + $iva;
 
-// ✅ actualizar carrito como comprado
+// actualizar carrito como comprado
 $sql = "UPDATE carrito
         SET estado = 'comprado',
             metodo_pago = ?,
@@ -114,7 +114,7 @@ Compra confirmada - Phandora
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- ✨ ESTILO GENERAL DE PHANDORA -->
+<!-- ESTILO GENERAL DE PHANDORA -->
 <link rel="stylesheet" href="css/interfaz.css">
 
 <style>
@@ -122,7 +122,7 @@ body{
     font-family:'Plus Jakarta Sans',sans-serif;
 }
 
-/* ✨ tarjeta principal */
+/* tarjeta principal */
 .card-confirmacion{
     background:rgba(28,28,28,.90);
     border:none;
@@ -131,7 +131,7 @@ body{
     color:white;
 }
 
-/* ✨ forzar texto claro */
+/* forzar texto claro */
 .card-confirmacion h1,
 .card-confirmacion h2,
 .card-confirmacion h3,
@@ -143,12 +143,12 @@ body{
     color:white !important;
 }
 
-/* ✨ subtítulos suaves */
+/* subtítulos suaves */
 .text-phandora{
     color:#f8d4ff !important;
 }
 
-/* ✨ alert términos */
+/* alert términos */
 .alert{
     background:#232323;
     border:none;
@@ -156,12 +156,12 @@ body{
     border-radius:20px;
 }
 
-/* ✨ líneas */
+/* líneas */
 hr{
     border-color:rgba(255,255,255,.12);
 }
 
-/* ✨ botón */
+/*  botón */
 .btn-light{
     border-radius:14px;
     font-weight:600;

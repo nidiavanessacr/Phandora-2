@@ -2,7 +2,7 @@
 session_start();
 require_once "../config/db.php";
 
-// 🔒 validar login
+// validar login
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: ../login.php");
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION["usuario_id"])) {
 
 $usuario_id = $_SESSION["usuario_id"];
 
-// 🛒 obtener carrito activo
+// obtener carrito activo
 $sql = "SELECT * 
         FROM carrito
         WHERE usuario_id = ?
@@ -33,7 +33,7 @@ while($item = $result->fetch_assoc()){
 
     $subtotal += $item["producto_precio"] * $item["cantidad"];
 
-    // 🔎 detectar productos con envío
+    // detectar productos con envío
     $nombre = strtolower($item["producto_nombre"]);
 
     if(
@@ -47,7 +47,7 @@ while($item = $result->fetch_assoc()){
     }
 }
 
-// 🚫 carrito vacío
+// carrito vacío
 if(empty($carrito)){
     header("Location: ver_carrito.php");
     exit;

@@ -2,7 +2,7 @@
 session_start();
 require_once '../config/db.php';
 
-// 🔒 seguridad
+// seguridad
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: ../login.php");
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION["usuario_id"])) {
 
 $usuario_id = $_SESSION["usuario_id"];
 
-// 🔎 obtener carrito activo
+// obtener carrito activo
 $sql = "SELECT * 
         FROM carrito 
         WHERE usuario_id = ? 

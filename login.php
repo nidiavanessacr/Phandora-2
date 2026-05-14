@@ -4,7 +4,7 @@ require_once 'config/db.php';
 
 $error = "";
 
-/* 🔒 si ya está logueado */
+/* si ya está logueado */
 if (isset($_SESSION['usuario_id'])) {
   header("Location: main.php");
   exit();
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && password_verify($password, $user['password'])) {
 
-      /* 🔥 SESIÓN UNIFICADA (CLAVE PARA TU NAVBAR) */
+      /* SESIÓN UNIFICADA (NAVBAR) */
       $_SESSION['usuario_id'] = $user['id'];
       $_SESSION['usuario_nombre'] = $user['nombre'];
       $_SESSION['rol'] = $user['rol'];
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="row justify-content-center">
     <div class="col-md-5">
 
-      <!-- 🎨 TU DISEÑO ORIGINAL SIN CAMBIOS -->
+      <!--  DISEÑO ORIGINAL SIN CAMBIOS -->
       <div class="card bg-dark text-white p-4 shadow-lg border-0 rounded-4">
 
         <h3 class="text-center mb-4">Iniciar sesión</h3>

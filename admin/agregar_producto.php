@@ -2,7 +2,7 @@
 session_start();
 require_once '../config/db.php';
 
-/* 🔒 solo admin */
+/*solo admin */
 if (!isset($_SESSION["usuario_id"]) || $_SESSION["rol"] !== "admin") {
     header("Location: ../login.php");
     exit;

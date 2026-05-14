@@ -2,39 +2,39 @@
 session_start();
 require_once '../config/db.php';
 
-// 🔒 validar admin
+// validar admin
 if (!isset($_SESSION["usuario_id"]) || $_SESSION["rol"] !== "admin") {
     header("Location: ../login.php");
     exit;
 }
 
-// 📦 productos
+// productos
 $productos = $conn->query("
     SELECT COUNT(*) AS total 
     FROM productos
 ")->fetch_assoc()["total"];
 
-// 👥 usuarios
+// usuarios
 $usuarios = $conn->query("
     SELECT COUNT(*) AS total 
     FROM usuarios
 ")->fetch_assoc()["total"];
 
-// 🛒 pedidos comprados
+// pedidos comprados
 $pedidos = $conn->query("
     SELECT COUNT(*) AS total 
     FROM carrito
     WHERE estado='comprado'
 ")->fetch_assoc()["total"];
 
-// 💰 ventas
+// ventas
 $totalVentas = $conn->query("
     SELECT COALESCE(SUM(total),0) AS total
     FROM carrito
     WHERE estado='comprado'
 ")->fetch_assoc()["total"];
 
-// 📋 últimos pedidos
+// últimos pedidos
 $ultimosPedidos = $conn->query("
     SELECT 
         c.*,
